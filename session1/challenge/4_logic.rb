@@ -10,4 +10,16 @@
 # grade(15, true)   # => "B"
 
 def grade(num_books, reads_books)
+  if num_books < 10
+    result = 'D'
+  elsif num_books <= 20
+    result = 'C'
+  else
+    result = 'B'
+  end
+
+  if reads_books
+    result = (result.ord - 1).chr
+  end
+  result
 end
