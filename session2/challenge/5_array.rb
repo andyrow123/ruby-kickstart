@@ -13,3 +13,14 @@
 # mod_three [7]  # => [1]
 #
 # mod_three [0,1,2,3,4,5,6,7] # => [1, 2, 1, 2, 1]
+def mod_three(numbers)
+  result = []
+  numbers.select do |num|
+    if num % 3 != 0
+      result << num % 3
+    end
+  end
+  result
+end
+
+mod_three [0,1,2,3,4,5,6,7] # => [1, 2, 1, 2, 1]
