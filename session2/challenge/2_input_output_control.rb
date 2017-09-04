@@ -20,6 +20,11 @@
 
 def hi_hi_goodbye
   # your code here
+  print "Enter a number"
+  
+  print "Enter a number"
+  print "Enter a number"
+
 end
 
 
