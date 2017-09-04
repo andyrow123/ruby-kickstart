@@ -20,10 +20,15 @@
 
 def hi_hi_goodbye
   # your code here
-  print "Enter a number"
-  
-  print "Enter a number"
-  print "Enter a number"
+  puts 'Enter a number'
+
+  while input = gets
+    break if input.chomp == 'bye'
+    puts 'hi ' * input.to_i
+    puts 'Enter a number'
+  end
+
+  puts 'goodbye'
 
 end
 
