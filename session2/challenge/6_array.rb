@@ -14,3 +14,13 @@
 # prime_chars? ['ab', 'cd']       # => false
 # prime_chars? ['a', 'bcd']       # => false
 # prime_chars? ['a', 'b', 'cd']   # => false
+
+def prime_chars? (str)
+  length = str.join.length
+  return false if length < 2
+  2.upto Math.sqrt(length) do |n|
+    return false if length % n == 0
+  end
+  true
+end
+
