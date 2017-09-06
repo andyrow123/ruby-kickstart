@@ -5,3 +5,8 @@
 # There will be no punctuation in the strings.
 #
 # first_pos "The dog and the cat and the cow" # => {"The" => 0, "dog" => 1, "and" => 2, "the" => 3, "cat" => 4, "cow" => 7}
+def first_pos(string)
+  Hash.new(0).tap { |hash| string.split(' ').each_with_index {|word, index| hash[word] = index unless hash.has_key?(word)}}
+end
+
+first_pos "The dog and the cat and the cow" # => {"The" => 0, "dog" => 1, "and" => 2, "the" => 3, "cat" => 4, "cow" => 7}
