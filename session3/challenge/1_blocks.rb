@@ -2,4 +2,6 @@
 # and returns an array of their results.
 #
 # reverse_map(1, 2, 3) { |i| i * 2 }      # => [6, 4, 2]
-
+def reverse_map(*numbers, &block)
+  numbers.reverse.map(&block)
+end
