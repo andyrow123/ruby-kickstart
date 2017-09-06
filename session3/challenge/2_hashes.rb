@@ -7,4 +7,13 @@
 # staircase 3  # => {1 => [], 3 => [2]}
 # staircase 4  # => {1 => [], 3 => [2]}
 # staircase 5  # => {1 => [], 3 => [2], 5 =>[2, 4]}
-
+def staircase(int)
+  hash = {}
+  keys = (1..int).to_a.select {|int| int.odd? }
+  keys.each { |key|
+    hash.merge!(key => (1..key).to_a.select {|int| int.even? })
+  }
+  hash
+end
+staircase 1
+staircase 5
