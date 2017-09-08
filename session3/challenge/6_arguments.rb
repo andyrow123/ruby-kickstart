@@ -17,3 +17,11 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+def match_maker(decider, *elements)
+  Array.new.tap do |item|
+    elements.each_slice 2 do |left, right|
+      left, right = !!left, !!right
+      item << (decider ? left != right : left == right)
+    end
+  end
+end
