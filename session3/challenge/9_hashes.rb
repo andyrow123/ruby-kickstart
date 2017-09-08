@@ -29,4 +29,17 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+  end_result  = Hash.new.tap {|hash|
+    check_arr = a | b
+    check_arr.each_with_index {|item, index|
+      a.include?(item) ? hash[item] = [true] : hash[item] = [nil]
+      b.include?(item) ? hash[item] << true : hash[item] << nil
+    }
+  }
+  result =  end_result.select{|key, value| value == [true, true]}.map {| key, value| key}.sort
+
+  return end_result, result
 end
+
+# shared [1,2,3], [1,2,4]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, nil], 4=>[nil, true]}, [1, 2]]
+# shared %w(a b c d), %w(aa b cc d)  # => [{"a"=>[true, nil], "b"=>[true, true], "c"=>[true, nil], "d"=>[true, true], "aa"=>[nil, true], "cc"=>[nil, true]}, ["b", "d"]]
