@@ -31,28 +31,60 @@ class HTMLTag
     :monospace  => '"Courier New", "Lucida Console"'
   }
 
-  attr_accessor :name, :innerHTML, :options
+  COLORS = {
+      :red   => '#FF0000',
+      :green => '#00FF00',
+      :blue  => '#0000FF'
+  }
+
+  attr_accessor :name, :innerHTML, :font, :color, :multiline
+                # :options
 
   # options: :multiline should be true or false
-  def initialize(name, innerHTML, options)
-    @name, @innerHTML, @options = name, innerHTML, options
+  def initialize(name, innerHTML, options={})
+    @name, @innerHTML = name, innerHTML
+    self.font      = FONTS[options[:font]]
+    self.color     = COLORS[options[:color]]
+    self.multiline = options.fetch :multiline, false
+    # @options = options
   end
 
-  def font
-    font = options[:font]  #  one of :serif, :sans_serif, or :monospace
-    FONTS[font]
-  end
+  # def font
+  #   font = options[:font]  #  one of :serif, :sans_serif, or :monospace
+  #   FONTS[font]
+  # end
+  #
+  # def color
+  #   color = options[:color] #  one of :red, :green, or :blue
+  #   COLORS[color]
+  # end
 
   def style
-    return nil unless options[:font]
-    "style='font-family:#{font}'"
+
+    # if options[:font] || options[:color]
+    #   ftu = font ? "font-family:#{font};" : ''
+    #   ctu = color ? "color:#{color};" : ''
+    #   "style='#{ftu}#{ctu}'"
+    # else
+    #   return nil
+    # end
+    return nil unless font || color
+    to_return = "style='"
+    to_return << "font-family:#{font};" if font
+    to_return << "color:#{color};" if color
+    to_return << "'"
+    to_return
   end
 
   def to_s
-    line_end = if options[:multiline] then "\n" else "" end
+    # line_end = if options[:multiline] then "\n" else "" end
+    line_end = ''
+    line_end = "\n" if multiline
     "<#{name} #{style}>#{line_end}"  \
     "#{innerHTML.chomp}#{line_end}"  \
     "</#{name}>\n"
   end
 
 end
+
+# html = HTMLTag.new('p', 'soccer').to_s.chomp
