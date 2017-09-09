@@ -29,5 +29,18 @@
 # create it from scratch :)
 
 
-def pathify
+def pathify(paths=Hash.mew)
+  # Base step
+  return paths.map { |path| '/' + path } if paths.is_a? Array
+
+  # Recursive step
+  to_return = []
+  paths.each do |parent_path, child_dirs|
+    parent_path = '/' + parent_path # Path begins with a /
+    child_paths = pathify child_dirs # Convert child directories to paths
+    child_paths.each do |child_path| # Join each child path to it's parent path
+      to_return << (parent_path + child_path)
+    end
+  end
+  to_return
 end
