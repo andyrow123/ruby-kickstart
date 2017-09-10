@@ -15,12 +15,10 @@
 # head = {:data => 6, :next => head}
 # print_list head                    # >> "6\n5\n4\n3\n2\n1\n"
 
-def list_size(list)
-  return 0 unless list
-  1 + list_size(list[:next])
-end
 
-def middle(list, distance=list_size(list)/2)
-  return list[:data] if distance == 0
-  middle list[:next], (distance - 1)
+def print_list(list)
+  while list
+    puts list[:data]
+    list = list[:next]
+  end
 end
